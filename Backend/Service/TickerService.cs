@@ -88,6 +88,9 @@ namespace Backend.Service
                             var bidQueue = bid.Value;
                             int boughtQuantity = 0;
 
+                            if (bidPrice < intSellPrice)
+                                break;
+
                             //execute through the bid queue til no more bid exist or Sold all.
                             while (intSellQuantity > 0 && bidQueue.Count >0)
                             {
@@ -184,6 +187,9 @@ namespace Backend.Service
                             var askPrice = ask.Key;
                             var askQueue = ask.Value;
                             int soldQuantity = 0;
+
+                            if (askPrice > intBuyPrice)
+                                break;
 
                             //execute through the ask queue til no more bid exist or Sold all.
                             while (intBuyQuantity > 0 && askQueue.Count > 0)
