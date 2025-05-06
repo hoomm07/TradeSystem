@@ -150,9 +150,9 @@
                         <TextBlock Text="Place Sell Order" Grid.Row="0" Foreground="White" FontWeight="Bold" Margin="10 10 0 10"/>
                         <WrapPanel Orientation="Horizontal" Grid.Row="1" Margin="10 0 0 10">
                             <TextBlock Text="Price:" Width="50" Foreground="White" VerticalAlignment="Center"/>
-                            <TextBox Text="{Binding SellPrice}" Foreground="White" Width="100" Margin="5 0"/>
+                            <TextBox Text="{Binding SellPrice}" Foreground="Black" Width="100" Margin="5 0"/>
                             <TextBlock Text="Quantity:" Width="60" Foreground="White" VerticalAlignment="Center" Margin="20 0 0 0"/>
-                            <TextBox Text="{Binding SellQuantity}" Foreground="White" Width="100" Margin="5 0"/>
+                            <TextBox Text="{Binding SellQuantity}" Foreground="Black" Width="100" Margin="5 0"/>
                             <Button Content="Sell" Foreground="White" Background="#04285f" Width="60" Margin="20 0" Command="{Binding SellClickCommand}" IsEnabled="{Binding IsConnected}"/>
                         </WrapPanel>
                     </Grid>
