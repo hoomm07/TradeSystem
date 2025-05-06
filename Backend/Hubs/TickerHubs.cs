@@ -52,7 +52,7 @@ namespace Backend.Hubs
         //Run Buy Logic -> new OrderBook of ticker to Group -> new TradeHistory to All
         public async Task PlaceBid(string tickerName, string buyPrice, string buyQuantity)
         {
-            _tickerService.BuyStock(buyPrice, buyQuantity, tickerName);
+            _tickerService.BuyStock(tickerName, buyPrice, buyQuantity);
             await Clients.Group(tickerName).SendAsync("ReceiveSpecificTickerData", _tickerService.GetOrderBook(tickerName));
             await Clients.All.SendAsync("ReceiveTradeHistory", _tickerService.GetTradeHistory());
         }

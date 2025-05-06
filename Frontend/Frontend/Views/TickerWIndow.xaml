@@ -153,7 +153,7 @@
                             <TextBox Text="{Binding SellPrice}" Foreground="Black" Width="100" Margin="5 0"/>
                             <TextBlock Text="Quantity:" Width="60" Foreground="Black" VerticalAlignment="Center" Margin="20 0 0 0"/>
                             <TextBox Text="{Binding SellQuantity}" Foreground="Black" Width="100" Margin="5 0"/>
-                            <Button Content="Sell" Foreground="Black" Width="60" Margin="20 0" Command="{Binding SellClickCommand}" IsEnabled="{Binding BoolConnection}"/>
+                            <Button Content="Sell" Foreground="Black" Width="60" Margin="20 0" Command="{Binding SellClickCommand}" IsEnabled="{Binding IsConnected}"/>
                         </WrapPanel>
                     </Grid>
                 </TabItem>
@@ -169,7 +169,7 @@
                             <TextBox Text="{Binding BuyPrice}" Width="100" Margin="5 0"/>
                             <TextBlock Text="Quantity:" Width="60" Foreground="Black" VerticalAlignment="Center" Margin="20 0 0 0"/>
                             <TextBox Text="{Binding BuyQuantity}" Width="100" Margin="5 0"/>
-                            <Button Content="Buy" Foreground="Black" Width="60" Margin="20 0" Command="{Binding BuyClickCommand}" IsEnabled="{Binding BoolConnection}"/>
+                            <Button Content="Buy" Foreground="Black" Width="60" Margin="20 0" Command="{Binding BuyClickCommand}" IsEnabled="{Binding IsConnected}"/>
                         </WrapPanel>
                     </Grid>
                 </TabItem>

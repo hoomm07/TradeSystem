@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.AspNetCore.SignalR.Client;
-using System.Threading.Tasks;
 using System.Windows;
 using static Frontend.TickerModels;
 
@@ -49,7 +48,7 @@ namespace Frontend
         private string _connectionColor;
 
         [ObservableProperty]
-        private bool _boolConnection;
+        private bool _isConnected;
         #endregion
 
         public TickerWindowViewModel(TickerModels.Ticker ticker) 
@@ -87,10 +86,9 @@ namespace Frontend
                 return Task.CompletedTask;
             };
 
-            _hubConnection.Reconnected += _ =>
+            _hubConnection.Reconnected += async _ =>
             {
-                NotifyReconnected();
-                return Task.CompletedTask;
+                await NotifyReconnected();
             };
 
             _hubConnection.Closed += _ =>
@@ -109,7 +107,7 @@ namespace Frontend
             await _hubConnection.InvokeAsync("AddToGroup", _tickerName);
             ConnectionText = "Connected";
             ConnectionColor = _colorConnected;
-            BoolConnection = true;
+            IsConnected = true;
         }
 
         private void SetDataGridOrderBook(List<OrderBook> orderBook)
@@ -143,21 +141,26 @@ namespace Frontend
 
         private void NotifyReconnecting()
         {
-            BoolConnection = false;
+            IsConnected = false;
             ConnectionColor = _colorDisconnected;
             ConnectionText = "Reconnecting";
         }
 
-        private void NotifyReconnected()
+        private async Task NotifyReconnected()
         {
-            BoolConnection = true;
+            IsConnected = true;
             ConnectionColor = _colorConnected;
             ConnectionText = "Connected";
+
+            //Reconnect and Invoke async methods that does not automatically request.
+            await _hubConnection.InvokeAsync("GetSpecificTickerData", _tickerName);
+            await _hubConnection.InvokeAsync("GetTradeHistory");
+            await _hubConnection.InvokeAsync("AddToGroup", _tickerName);
         }
 
         private void NotifyClosed()
         {
-            BoolConnection = false;
+            IsConnected = false;
             ConnectionColor = _colorDisconnected;
             ConnectionText = "Connection Failed. Please restart.";
         }
@@ -174,8 +177,16 @@ namespace Frontend
                 }
                 else
                 {
-                    //Error Message of please enter more then 0 
+                    MessageBox.Show(
+                        "Price and Quantity must be greater than 0.", 
+                        "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
                 }
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Price and Quantity must be valid integers.",
+                    "Invalid Input", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
 
             return isValid;
@@ -191,10 +202,6 @@ namespace Frontend
             {
                 await _hubConnection.InvokeAsync("PlaceAsk", TickerName, SellPrice, SellQuantity);
             }
-            else
-            {
-
-            }
         }
 
         [RelayCommand]
@@ -203,15 +210,6 @@ namespace Frontend
             if (ValidatePriceQuantity(BuyPrice, BuyQuantity))
             {
                 await _hubConnection.InvokeAsync("PlaceBid", TickerName, BuyPrice, BuyQuantity);
-            }
-            else
-            {
-                MessageBox.Show(
-                    "Please insert valid Price and Quantity.",
-                    "Input Error",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error
-                );
             }
         }
         #endregion
