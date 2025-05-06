@@ -1,5 +1,5 @@
-Backend\n
-Application using SignalR\n
+Backend
+Application using SignalR
 Each time signalR is run, random Trade Datas of tickers will be Generated (Changed once it's closed)
 
 Frontend
