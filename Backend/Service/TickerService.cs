@@ -161,7 +161,7 @@ namespace Backend.Service
 
                 if (TickerDatas.TickerAsks.TryGetValue(tickerName, out var asks))
                 {
-                    int lowestAskPrice = asks.Keys.Max();
+                    int lowestAskPrice = asks.Keys.Min();
 
                     if (intBuyPrice < lowestAskPrice)
                     {
