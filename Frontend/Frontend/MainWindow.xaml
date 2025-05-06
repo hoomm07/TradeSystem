@@ -1,0 +1,27 @@
+﻿<Window x:Class="Frontend.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Frontend"
+        mc:Ignorable="d"
+        Title="Trading System" Height="380" Width="280" MinWidth="280" MinHeight="380">
+    <Grid Margin="10">
+        <StackPanel Loaded="StackPanel_Loaded">
+            <Ellipse Height="11" Width="11" Stroke="Transparent" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 3 3 0"
+                     Fill="{Binding ConnectionColor}"/>
+            <TextBlock Text="{Binding ConnectionText}" FontWeight="Bold" Margin="5"/>
+            <ListView ItemsSource="{Binding Tickers}" 
+                      DisplayMemberPath="Name"
+                      SelectedItem="{Binding SelectedTicker}"
+                      HorizontalContentAlignment="Center"
+                      AlternationCount="2"
+                      IsEnabled="{Binding BoolConnection}"
+                      MinHeight="220"/>
+            <Button Content="Select" Width="60" HorizontalAlignment="Right" Margin="0 10 0 0"
+                    Command="{Binding SelectClickCommand}"
+                    IsEnabled="{Binding BoolConnection}"/>
+            
+        </StackPanel>
+    </Grid>
+</Window>
