@@ -166,6 +166,18 @@ namespace Frontend
         {
             bool isValid = false;
 
+            if (int.TryParse(price, out int intPrice) && int.TryParse(quantity, out int intQuantity))
+            {
+                if (intPrice > 0 && intQuantity > 0)
+                {
+                    isValid = true;
+                }
+                else
+                {
+                    //Error Message of please enter more then 0 
+                }
+            }
+
             return isValid;
         }
 
@@ -187,7 +199,7 @@ namespace Frontend
 
         [RelayCommand]
         private async Task BuyClick()
-        { 
+        {
             if (ValidatePriceQuantity(BuyPrice, BuyQuantity))
             {
                 await _hubConnection.InvokeAsync("PlaceBid", TickerName, BuyPrice, BuyQuantity);

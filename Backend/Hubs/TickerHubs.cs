@@ -40,15 +40,21 @@ namespace Backend.Hubs
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
         }
-
+        
+        //Run Sell Logic -> new OrderBook of ticker to Group -> new TradeHistory to All
         public async Task PlaceAsk(string tickerName, string sellPrice, string sellQuantity)
         {
-            _tickerService.SellPrice(sellPrice, sellQuantity, tickerName);
+            _tickerService.SellStock(tickerName, sellPrice, sellQuantity);
+            await Clients.Group(tickerName).SendAsync("ReceiveSpecificTickerData", _tickerService.GetOrderBook(tickerName));
+            await Clients.All.SendAsync("ReceiveTradeHistory", _tickerService.GetTradeHistory());
         }
 
+        //Run Buy Logic -> new OrderBook of ticker to Group -> new TradeHistory to All
         public async Task PlaceBid(string tickerName, string buyPrice, string buyQuantity)
         {
-            _tickerService.
+            _tickerService.BuyStock(buyPrice, buyQuantity, tickerName);
+            await Clients.Group(tickerName).SendAsync("ReceiveSpecificTickerData", _tickerService.GetOrderBook(tickerName));
+            await Clients.All.SendAsync("ReceiveTradeHistory", _tickerService.GetTradeHistory());
         }
     }
 }
