@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Frontend.Views"
         mc:Ignorable="d"
-        Title="{Binding TickerName}" Height="750" Width="850" Loaded="Window_Loaded">
+        Title="{Binding TickerName}" Height="750" Width="850" Loaded="Window_Loaded" Background="#04111e">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -49,7 +49,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--DataGrid for Ask and Bid-->
-            <TextBlock Text="{Binding TickerName, StringFormat=Ticker: {0}}" FontWeight="Bold" Grid.Row="0"/>
+            <TextBlock Text="{Binding TickerName, StringFormat=Ticker: {0}}" FontWeight="Bold" Grid.Row="0" Foreground="White"/>
             <DataGrid 
                 ItemsSource="{Binding OrderBook}" 
                 Margin="0 5 0 0" 
@@ -85,7 +85,7 @@
         <Grid Grid.Column="2" Grid.RowSpan="2" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5*"/>
-                <RowDefinition Height="5"/>
+                <RowDefinition Height="3"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
@@ -95,7 +95,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <!--Trade History-->
-                    <TextBlock Text="Trade History" FontWeight="Bold" Grid.Row="0"/>
+                    <TextBlock Text="Trade History" FontWeight="Bold" Grid.Row="0" Foreground="White"/>
                     <DataGrid
                         Grid.Row="1"
                         ItemsSource="{Binding TradeHistory}" 
@@ -142,34 +142,34 @@
 
             <TabControl Grid.Row="2" Margin="0 10 0 0">
                 <TabItem Header="Place Ask">
-                    <Grid Margin="5">
+                    <Grid Margin="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Place Sell Order" Grid.Row="0" Foreground="Black" FontWeight="Bold" Margin="0 0 0 10"/>
-                        <WrapPanel Orientation="Horizontal" Grid.Row="1" Margin="0 0 0 10">
-                            <TextBlock Text="Price:" Width="50" Foreground="Black" VerticalAlignment="Center"/>
-                            <TextBox Text="{Binding SellPrice}" Foreground="Black" Width="100" Margin="5 0"/>
-                            <TextBlock Text="Quantity:" Width="60" Foreground="Black" VerticalAlignment="Center" Margin="20 0 0 0"/>
-                            <TextBox Text="{Binding SellQuantity}" Foreground="Black" Width="100" Margin="5 0"/>
-                            <Button Content="Sell" Foreground="Black" Width="60" Margin="20 0" Command="{Binding SellClickCommand}" IsEnabled="{Binding IsConnected}"/>
+                        <TextBlock Text="Place Sell Order" Grid.Row="0" Foreground="White" FontWeight="Bold" Margin="10 10 0 10"/>
+                        <WrapPanel Orientation="Horizontal" Grid.Row="1" Margin="10 0 0 10">
+                            <TextBlock Text="Price:" Width="50" Foreground="White" VerticalAlignment="Center"/>
+                            <TextBox Text="{Binding SellPrice}" Foreground="White" Width="100" Margin="5 0"/>
+                            <TextBlock Text="Quantity:" Width="60" Foreground="White" VerticalAlignment="Center" Margin="20 0 0 0"/>
+                            <TextBox Text="{Binding SellQuantity}" Foreground="White" Width="100" Margin="5 0"/>
+                            <Button Content="Sell" Foreground="White" Background="#04285f" Width="60" Margin="20 0" Command="{Binding SellClickCommand}" IsEnabled="{Binding IsConnected}"/>
                         </WrapPanel>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Place Bid">
-                    <Grid Margin="5">
+                    <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="Place Buy Order" Grid.Row="0" Foreground="Black" FontWeight="Bold" Margin="0 0 0 10"/>
-                        <WrapPanel Orientation="Horizontal" Grid.Row="1" Margin="0 0 0 10">
-                            <TextBlock Text="Price:" Width="50" Foreground="Black" VerticalAlignment="Center"/>
+                        <TextBlock Text="Place Buy Order" Grid.Row="0" Foreground="White" FontWeight="Bold" Margin="10 10 0 10"/>
+                        <WrapPanel Orientation="Horizontal" Grid.Row="1" Margin="10 0 0 10">
+                            <TextBlock Text="Price:" Width="50" Foreground="White" VerticalAlignment="Center"/>
                             <TextBox Text="{Binding BuyPrice}" Width="100" Margin="5 0"/>
-                            <TextBlock Text="Quantity:" Width="60" Foreground="Black" VerticalAlignment="Center" Margin="20 0 0 0"/>
+                            <TextBlock Text="Quantity:" Width="60" Foreground="White" VerticalAlignment="Center" Margin="20 0 0 0"/>
                             <TextBox Text="{Binding BuyQuantity}" Width="100" Margin="5 0"/>
-                            <Button Content="Buy" Foreground="Black" Width="60" Margin="20 0" Command="{Binding BuyClickCommand}" IsEnabled="{Binding IsConnected}"/>
+                            <Button Content="Buy" Foreground="White" Background="#DD2222" Width="60" Margin="20 0" Command="{Binding BuyClickCommand}" IsEnabled="{Binding IsConnected}"/>
                         </WrapPanel>
                     </Grid>
                 </TabItem>
