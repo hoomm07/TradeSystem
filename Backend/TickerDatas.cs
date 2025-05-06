@@ -9,7 +9,7 @@ namespace Backend
         public static List<Ticker> Tickers { get; }
 
         //Always have it sorted by using SortedDictionary.
-        //Queue for FIFO.
+        //Queue used for OrderBookAsks and OrderBookBids.
         public static Dictionary<string, SortedDictionary<int, Queue<OrderBookAsks>>> TickerAsks { get; }
         public static Dictionary<string, SortedDictionary<int, Queue<OrderBookBids>>> TickerBids { get; }
         public static List<TradeHistory> TradeHistory { get; }

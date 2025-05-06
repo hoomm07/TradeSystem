@@ -3,9 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using Frontend.Views;
 using Microsoft.AspNetCore.SignalR.Client;
 using System.Collections.ObjectModel;
-using System.Drawing;
-using System.Threading.Tasks;
-using System.Windows;
 using static Frontend.TickerModels;
 
 namespace Frontend

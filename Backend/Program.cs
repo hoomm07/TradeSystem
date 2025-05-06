@@ -6,7 +6,7 @@ var app = builder.Build();
 app.UseDefaultFiles();
 var tickers = Backend.TickerDatas.Tickers;
 
-app.MapGet("/", () => "Ticker Backend Application");
+app.MapGet("/", () => "Ticker Backend Application Running");
 
 app.MapHub<TickerHubs>("/Ticker");
 app.Run();

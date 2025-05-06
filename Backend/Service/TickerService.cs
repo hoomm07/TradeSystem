@@ -1,5 +1,4 @@
 ﻿using Backend.Models;
-using System.Threading.Tasks;
 
 namespace Backend.Service
 {
